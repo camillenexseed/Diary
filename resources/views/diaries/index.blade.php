@@ -10,6 +10,7 @@
 </a>
 @foreach ($diaries as $diary)
     <div class="m-4 p-4 border border-primary">
+        <p>投稿者：{{ $diary->user->name}}</p>
         <p>{{ $diary->title }}</p>
         <p>{{ $diary->body }}</p>
         <p>{{ $diary->created_at }}</p>
