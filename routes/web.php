@@ -23,6 +23,10 @@ Route::get('/', 'DiaryController@index')->name('diary.index');
     Route::get('diary/{id}/edit', 'DiaryController@edit')->name('diary.edit'); // 編集画面
     Route::put('diary/{id}/update', 'DiaryController@update')->name('diary.update'); //更新処理
 
+    Route::post('diary/{id}/like', 'DiaryController@like');
+    Route::post('diary/{id}/dislike', 'DiaryController@dislike');
+
 });
 
 Auth::routes();
+
