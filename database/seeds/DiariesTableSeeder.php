@@ -13,8 +13,7 @@ class DiariesTableSeeder extends Seeder
      */
     public function run()
     {
-        // 追加
-        $user = DB::table('users')->first();
+        $user = DB::table('users')->first(); //追加
 
         $diaries = [
             [
@@ -36,6 +35,7 @@ class DiariesTableSeeder extends Seeder
             DB::table('diaries')->insert([
                 'title' => $diary['title'],
                 'body' => $diary['body'],
+                'user_id' => $user->id, //追加
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
