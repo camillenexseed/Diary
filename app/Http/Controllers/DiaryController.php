@@ -17,6 +17,10 @@ class DiaryController extends Controller
         //all()はテーブルのデータを全て取得するメソッド
         $diaries = Diary::all();
 
-        dd($diaries);  //var_dump()とdie()を合わせたメソッド。変数の確認 + 処理のストップ
+        // 昇順・降順
+        // $diaries = Diary::orderBy('id', 'desc')->get();
+
+        // view/diaries/index.blade.phpを表示
+        return view('diaries.index',['diaries' => $diaries]);
     }
 }
