@@ -53,4 +53,14 @@ class DiaryController extends Controller
         return redirect()->route('diary.index');
     }
 
+    public function edit(int $id)
+    {
+         //Diaryモデルを使用して、diariesテーブルから$idと一致するidをもつデータを取得
+        $diary = Diary::find($id); 
+
+        return view('diaries.edit', [
+            'diary' => $diary,
+        ]);
+    }
+
 }
