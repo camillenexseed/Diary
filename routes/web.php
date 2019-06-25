@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'DiaryController@index')->name('diary.index');
+
+Route::get('diary/create', 'DiaryController@create')->name('diary.create'); // 投稿画面
+Route::post('diary/create', 'DiaryController@store')->name('diary.create'); // 保存処理
