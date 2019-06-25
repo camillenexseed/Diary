@@ -20,3 +20,7 @@ Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destr
 
 Route::get('diary/{id}/edit', 'DiaryController@edit')->name('diary.edit'); // 編集画面
 Route::put('diary/{id}/update', 'DiaryController@update')->name('diary.update'); //更新処理
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
