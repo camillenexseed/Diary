@@ -17,8 +17,8 @@ class DiaryController extends Controller
 
         //diariesテーブルのデータを全件取得
         //useしてるDiaryのallメソッドを実施
-        //all()はテーブルのデータを全て取得するメソッド
-        $diaries = Diary::all();
+
+        $diaries = Diary::with('likes')->orderBy('id', 'desc')->get(); //修正
 
         // 昇順・降順
         // $diaries = Diary::orderBy('id', 'desc')->get();
@@ -76,6 +76,20 @@ class DiaryController extends Controller
         $diary->save(); //DBに保存
 
         return redirect()->route('diary.index'); //一覧ページにリダイレクト
+    }
+
+    public function like(int $id)
+    {
+        $diary = Diary::where('id', $id)->with('likes')->first();
+
+        $diary->likes()->attach(Auth::user()->id);
+    }
+
+    public function dislike(int $id)
+    {
+        $diary = Diary::where('id', $id)->with('likes')->first();
+
+        $diary->likes()->detach(Auth::user()->id);
     }
 
 }
