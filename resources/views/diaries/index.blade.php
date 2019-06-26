@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('title')
 一覧
@@ -10,19 +10,21 @@
 </a>
 @foreach ($diaries as $diary)
     <div class="m-4 p-4 border border-primary">
+        <p>投稿者：{{ $diary->user->name }}</p>
         <p>{{ $diary->title }}</p>
         <p>{{ $diary->body }}</p>
+        <p>{{ $diary->created_at }}</p>
         @if (Auth::check() && Auth::user()->id === $diary->user_id)
-        <a class="btn btn-success" href="{{ route('diary.edit', ['id' => $diary->id]) }}">編集</a>
+            <a class="btn btn-success" href="{{ route('diary.edit', ['id' => $diary->id]) }}">編集</a>
 
-        <form action="{{ route('diary.destroy', ['id' => $diary->id]) }}" method="post" class="d-inline">
-            @csrf
-            @method('delete')
-            <button class="btn btn-danger">削除</button>
-        </form>
+            <form action="{{ route('diary.destroy', ['id' => $diary->id]) }}" method="post" class="d-inline">
+                @csrf
+                @method('delete')
+                <button class="btn btn-danger">削除</button>
+            </form>
         @endif
         <div class=" mt-3 ml-3">
-           @if (Auth::check() && $diary->likes->contains(function ($user) {
+            @if (Auth::check() && $diary->likes->contains(function ($user) {
                return $user->id === Auth::user()->id;
            }))
                <i class="fas fa-heart fa-lg text-danger js-dislike"></i>
@@ -31,8 +33,8 @@
            @endif
            <input class="diary-id" type="hidden" value="{{ $diary->id }}">
            <span class="js-like-num">{{ $diary->likes->count() }}</span>
+            <!-- 紐づいてるレコード数を取得していいね数を表示 -->
         </div>
-
     </div>
 @endforeach
 @endsection

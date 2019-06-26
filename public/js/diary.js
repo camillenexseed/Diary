@@ -19,7 +19,7 @@ function like(diaryId, $clickedBtn) {
     .then(
         function (data) {
             changeLikeBtn($clickedBtn);
-            
+
             // いいね数を1増やす
             let num = Number($clickedBtn.siblings('.js-like-num').text());
             $clickedBtn.siblings('.js-like-num').text(num + 1);
